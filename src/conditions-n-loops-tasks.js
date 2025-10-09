@@ -177,8 +177,55 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const digit = numberStr[i];
+    let digitStr;
+    switch (digit) {
+      case '-':
+        digitStr = 'minus';
+        break;
+      case '0':
+        digitStr = 'zero';
+        break;
+      case '1':
+        digitStr = 'one';
+        break;
+      case '2':
+        digitStr = 'two';
+        break;
+      case '3':
+        digitStr = 'three';
+        break;
+      case '4':
+        digitStr = 'four';
+        break;
+      case '5':
+        digitStr = 'five';
+        break;
+      case '6':
+        digitStr = 'six';
+        break;
+      case '7':
+        digitStr = 'seven';
+        break;
+      case '8':
+        digitStr = 'eight';
+        break;
+      case '9':
+        digitStr = 'nine';
+        break;
+      default:
+        digitStr = 'point';
+    }
+    if (i === 0) {
+      result = digitStr;
+    } else {
+      result = `${result} ${digitStr}`;
+    }
+  }
+  return result;
 }
 
 /**
@@ -305,8 +352,42 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const matrix = [];
+  for (let i = 0; i < size; i += 1) {
+    matrix[i] = [];
+  }
+  let number = 1;
+  let matrixRowStart = 0;
+  let matrixRowEnd = size - 1;
+  let matrixColumnStart = 0;
+  let matrixColumnEnd = size - 1;
+  while (
+    matrixRowStart <= matrixRowEnd ||
+    matrixColumnStart <= matrixColumnEnd
+  ) {
+    for (let j = matrixColumnStart; j <= matrixColumnEnd; j += 1) {
+      matrix[matrixRowStart][j] = number;
+      number += 1;
+    }
+    matrixRowStart += 1;
+    for (let k = matrixRowStart; k <= matrixRowEnd; k += 1) {
+      matrix[k][matrixColumnEnd] = number;
+      number += 1;
+    }
+    matrixColumnEnd -= 1;
+    for (let m = matrixColumnEnd; m >= matrixColumnStart; m -= 1) {
+      matrix[matrixRowEnd][m] = number;
+      number += 1;
+    }
+    matrixRowEnd -= 1;
+    for (let n = matrixRowEnd; n >= matrixRowStart; n -= 1) {
+      matrix[n][matrixColumnStart] = number;
+      number += 1;
+    }
+    matrixColumnStart += 1;
+  }
+  return matrix;
 }
 
 /**
